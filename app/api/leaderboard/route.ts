@@ -4,17 +4,25 @@ import {
   addLeaderboardEntry,
   LeaderboardEntry,
 } from "@/lib/google-sheets";
+import { corsResponse, handleCors } from "@/lib/cors";
+
+// Handle preflight OPTIONS request
+export async function OPTIONS(request: NextRequest) {
+  const headers = handleCors(request);
+  return NextResponse.json({}, { status: 200, headers });
+}
 
 // GET: Fetch top 3 leaderboard entries
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
     const leaderboard = await fetchLeaderboardData();
-    return NextResponse.json({ success: true, data: leaderboard });
+    return corsResponse({ success: true, data: leaderboard }, 200, request);
   } catch (error) {
     console.error("Error in GET /api/leaderboard:", error);
-    return NextResponse.json(
+    return corsResponse(
       { success: false, error: "Failed to fetch leaderboard data" },
-      { status: 500 }
+      500,
+      request
     );
   }
 }
@@ -27,16 +35,18 @@ export async function POST(request: NextRequest) {
 
     // Validate input
     if (!name || typeof name !== "string" || name.trim() === "") {
-      return NextResponse.json(
+      return corsResponse(
         { success: false, error: "Invalid or missing name" },
-        { status: 400 }
+        400,
+        request
       );
     }
 
     if (score === undefined || typeof score !== "number" || score < 0) {
-      return NextResponse.json(
+      return corsResponse(
         { success: false, error: "Invalid or missing score" },
-        { status: 400 }
+        400,
+        request
       );
     }
 
@@ -48,16 +58,21 @@ export async function POST(request: NextRequest) {
 
     await addLeaderboardEntry(entry);
 
-    return NextResponse.json({
-      success: true,
-      message: "Entry added successfully",
-      data: entry,
-    });
+    return corsResponse(
+      {
+        success: true,
+        message: "Entry added successfully",
+        data: entry,
+      },
+      200,
+      request
+    );
   } catch (error) {
     console.error("Error in POST /api/leaderboard:", error);
-    return NextResponse.json(
+    return corsResponse(
       { success: false, error: "Failed to add leaderboard entry" },
-      { status: 500 }
+      500,
+      request
     );
   }
 }
