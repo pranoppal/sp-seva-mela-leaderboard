@@ -23,8 +23,7 @@ const mockLeaderboardData: LeaderboardEntry[] = [
 ];
 
 export default function Leaderboard() {
-  const [leaderboard, setLeaderboard] =
-    useState<LeaderboardEntry[]>(mockLeaderboardData);
+  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
