@@ -8,9 +8,24 @@ interface LeaderboardEntry {
   timestamp?: string;
 }
 
+// Mock data for testing
+const mockLeaderboardData: LeaderboardEntry[] = [
+  { name: "Rajesh Kumar", score: 2850, timestamp: "2025-11-06T10:30:00Z" },
+  { name: "Priya Sharma", score: 2720, timestamp: "2025-11-06T10:25:00Z" },
+  { name: "Amit Patel", score: 2680, timestamp: "2025-11-06T10:20:00Z" },
+  { name: "Sneha Reddy", score: 2540, timestamp: "2025-11-06T10:15:00Z" },
+  { name: "Vikram Singh", score: 2420, timestamp: "2025-11-06T10:10:00Z" },
+  { name: "Anjali Desai", score: 2310, timestamp: "2025-11-06T10:05:00Z" },
+  { name: "Rohit Mehta", score: 2180, timestamp: "2025-11-06T10:00:00Z" },
+  { name: "Kavita Iyer", score: 2050, timestamp: "2025-11-06T09:55:00Z" },
+  { name: "Arjun Nair", score: 1920, timestamp: "2025-11-06T09:50:00Z" },
+  { name: "Pooja Gupta", score: 1780, timestamp: "2025-11-06T09:45:00Z" },
+];
+
 export default function Leaderboard() {
-  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [leaderboard, setLeaderboard] =
+    useState<LeaderboardEntry[]>(mockLeaderboardData);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
 
@@ -80,17 +95,12 @@ export default function Leaderboard() {
   }
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-6">
+    <div className="w-full max-w-7xl mx-auto p-6">
       <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
         {/* Header */}
-        <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-8 text-center">
-          <h1 className="text-4xl font-bold mb-2">🏆 Leaderboard</h1>
-          <p className="text-purple-100 text-sm">Top 3 Players</p>
-          {lastUpdated && (
-            <p className="text-purple-200 text-xs mt-2">
-              Last updated: {lastUpdated.toLocaleTimeString()}
-            </p>
-          )}
+        <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-11 text-center">
+          <h1 className="text-7xl font-bold mb-2">Seva Mela 2025</h1>
+          <h1 className="text-5xl font-bold mb-2">🏆 Leaderboard</h1>
         </div>
 
         {/* Error Message */}
@@ -135,11 +145,6 @@ export default function Leaderboard() {
               </div>
             ))
           )}
-        </div>
-
-        {/* Auto-refresh indicator */}
-        <div className="bg-gray-50 px-6 py-4 text-center text-sm text-gray-600 border-t">
-          <p>🔄 Auto-refreshes every minute</p>
         </div>
       </div>
     </div>
