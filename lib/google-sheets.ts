@@ -56,8 +56,8 @@ export async function fetchLeaderboardData(): Promise<LeaderboardEntry[]> {
       }))
       .filter((entry) => entry.name && !isNaN(entry.score));
 
-    // Sort by score descending and return top 3
-    return leaderboard.sort((a, b) => b.score - a.score).slice(0, 3);
+    // Sort by score descending and return top 5
+    return leaderboard.sort((a, b) => b.score - a.score).slice(0, 5);
   } catch (error) {
     console.error("Error fetching leaderboard data:", error);
     throw error;

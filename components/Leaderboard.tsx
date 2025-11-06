@@ -67,6 +67,10 @@ export default function Leaderboard() {
         return "bg-gradient-to-r from-gray-400 to-gray-500 text-gray-900";
       case 2:
         return "bg-gradient-to-r from-amber-600 to-amber-700 text-gray-900";
+      case 3:
+        return "bg-gradient-to-r from-blue-500 to-blue-600 text-gray-900";
+      case 4:
+        return "bg-gradient-to-r from-green-500 to-green-600 text-gray-900";
       default:
         return "bg-gray-700 text-gray-100";
     }
@@ -80,6 +84,10 @@ export default function Leaderboard() {
         return "🥈";
       case 2:
         return "🥉";
+      case 3:
+        return "⭐";
+      case 4:
+        return "🌟";
       default:
         return "";
     }
@@ -94,15 +102,15 @@ export default function Leaderboard() {
   }
 
   return (
-    <div className="w-full max-w-7xl mx-auto p-6">
+    <div className="w-full max-w-7xl mx-auto p-4">
       <div
         className="rounded-2xl shadow-2xl overflow-hidden border border-gray-700"
         style={{ backgroundColor: "rgb(98 105 119)" }}
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-11 text-center">
-          <h1 className="text-7xl font-bold mb-2">Seva Mela 2025</h1>
-          <h1 className="text-5xl font-bold mb-2">🏆 Leaderboard</h1>
+        <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-7 text-center">
+          <h1 className="text-5xl font-bold mb-2">Seva Mela 2025</h1>
+          <h1 className="text-3xl font-bold mb-2">🏆 Leaderboard</h1>
         </div>
 
         {/* Error Message */}
@@ -118,7 +126,7 @@ export default function Leaderboard() {
 
         {/* Leaderboard Entries */}
         <div className="p-6 space-y-4">
-          {leaderboard.length === 0 ? (
+          {!leaderboard || leaderboard.length === 0 ? (
             <div className="text-center py-12 text-gray-400">
               <p className="text-xl">No entries yet</p>
               <p className="text-sm mt-2">Be the first to score!</p>
