@@ -63,13 +63,13 @@ export default function Leaderboard() {
   const getMedalColor = (position: number) => {
     switch (position) {
       case 0:
-        return "bg-gradient-to-r from-yellow-400 to-yellow-600 text-yellow-900";
+        return "bg-gradient-to-r from-yellow-500 to-yellow-600 text-gray-900";
       case 1:
-        return "bg-gradient-to-r from-gray-300 to-gray-500 text-gray-900";
+        return "bg-gradient-to-r from-gray-400 to-gray-500 text-gray-900";
       case 2:
-        return "bg-gradient-to-r from-amber-600 to-amber-800 text-amber-100";
+        return "bg-gradient-to-r from-amber-600 to-amber-700 text-gray-900";
       default:
-        return "bg-gray-200 text-gray-900";
+        return "bg-gray-700 text-gray-100";
     }
   };
 
@@ -88,15 +88,18 @@ export default function Leaderboard() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
+      <div className="flex items-center justify-center min-h-[400px] bg-gray-900">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-purple-500"></div>
       </div>
     );
   }
 
   return (
     <div className="w-full max-w-7xl mx-auto p-6">
-      <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+      <div
+        className="rounded-2xl shadow-2xl overflow-hidden border border-gray-700"
+        style={{ backgroundColor: "rgb(98 105 119)" }}
+      >
         {/* Header */}
         <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-11 text-center">
           <h1 className="text-7xl font-bold mb-2">Seva Mela 2025</h1>
@@ -106,7 +109,7 @@ export default function Leaderboard() {
         {/* Error Message */}
         {error && (
           <div
-            className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 m-4"
+            className="bg-red-900 border-l-4 border-red-500 text-red-200 p-4 m-4"
             role="alert"
           >
             <p className="font-bold">Error</p>
@@ -117,7 +120,7 @@ export default function Leaderboard() {
         {/* Leaderboard Entries */}
         <div className="p-6 space-y-4">
           {leaderboard.length === 0 ? (
-            <div className="text-center py-12 text-gray-500">
+            <div className="text-center py-12 text-gray-400">
               <p className="text-xl">No entries yet</p>
               <p className="text-sm mt-2">Be the first to score!</p>
             </div>
@@ -127,7 +130,7 @@ export default function Leaderboard() {
                 key={`${entry.name}-${index}`}
                 className={`${getMedalColor(
                   index
-                )} rounded-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-xl`}
+                )} rounded-xl p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl`}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
